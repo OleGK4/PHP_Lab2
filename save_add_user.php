@@ -2,9 +2,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');
 
+require_once(__DIR__.'/sql_connection.php');
 
-
-$mysql = mysqli_connect("localhost", "root", "", "Parking_DB");
 if (mysqli_connect_errno()) {
     echo "ОШЫБКА", mysqli_connect_error();
 }

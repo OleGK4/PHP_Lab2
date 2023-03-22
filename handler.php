@@ -9,7 +9,7 @@ if (empty($_GET)) {
 
 $id = $_GET['id'];
 
-$mysql = mysqli_connect("localhost", "root", "", "Parking_DB");
+require_once(__DIR__.'/sql_connection.php');
 
 if (mysqli_connect_errno()) {
     echo "ОШЫБКА", mysqli_connect_error();

@@ -1,5 +1,5 @@
 <?php
-$mysql = mysqli_connect("localhost", "root", "", "Parking_DB");
+require_once(__DIR__.'/sql_connection.php');
 
 if (mysqli_connect_errno()) {
     echo "ОШЫБКА", mysqli_connect_error();
@@ -33,6 +33,9 @@ while ($row = mysqli_fetch_assoc($result)) {
     </a><br><br>
     <a href="handler.php?id=<?= $row['id'] ?>">
         <button>Удалить</button>
+    </a><br><br>
+    <a href="test.php?id=<?= $row['id'] ?>">
+        <button>ТЕСТ</button>
     </a><br>
 
     <?php
