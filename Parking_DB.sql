@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 22 2023 г., 18:23
+-- Время создания: Мар 24 2023 г., 17:00
 -- Версия сервера: 8.0.30
--- Версия PHP: 7.2.34
+-- Версия PHP: 8.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -51,23 +51,25 @@ INSERT INTO `Cars` (`id`, `brand`, `model`, `color`, `client_id`) VALUES
 --
 
 CREATE TABLE `Client` (
-  `id` int NOT NULL,
-  `client_name` char(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `time_arrive` time NOT NULL,
-  `date_arrive` date DEFAULT NULL,
-  `sale` int DEFAULT NULL,
-  `debt` int DEFAULT NULL
+  `id` int NOT NULL COMMENT 'ID пользователя',
+  `client_name` char(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'имя клиента',
+  `sale` int DEFAULT NULL COMMENT 'скидка на покупки',
+  `debt` int DEFAULT NULL COMMENT 'долг по оплате',
+  `login` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'логин для авторизации',
+  `password` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'пароль для авторизации',
+  `access_level` tinyint(1) DEFAULT NULL COMMENT 'уровень доступа (0, 1)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `Client`
 --
 
-INSERT INTO `Client` (`id`, `client_name`, `time_arrive`, `date_arrive`, `sale`, `debt`) VALUES
-(3, 'Danilin Danila Danilovich', '20:35:00', '2023-10-15', 0, 1200),
-(8, 'Maksimov Maksim Maksimovich', '14:20:30', '2010-05-23', 0, 1200),
-(9, 'Evgeniev Evgeny Evgenievich', '08:10:21', '2015-02-13', 200, 600),
-(10, 'Vasiliev Vasily Vasilievich', '20:40:30', '2007-12-01', 0, 3000);
+INSERT INTO `Client` (`id`, `client_name`, `sale`, `debt`, `login`, `password`, `access_level`) VALUES
+(8, 'Maksimov Maksim Maksimovich', 0, 1200, NULL, NULL, NULL),
+(9, 'Evgeniev Evgeny Evgenievich', 200, 600, NULL, NULL, NULL),
+(10, 'Vasiliev Vasily Vasilievich', 0, 3000, NULL, NULL, NULL),
+(13, 'Vovan Vovkin Vovovich', NULL, NULL, 'vovan', '3443', 0),
+(16, 'Sergein Sergay Sergeevich', NULL, NULL, 'serega', '3443', 1);
 
 -- --------------------------------------------------------
 
@@ -76,18 +78,21 @@ INSERT INTO `Client` (`id`, `client_name`, `time_arrive`, `date_arrive`, `sale`,
 --
 
 CREATE TABLE `ParkingPlaces` (
-  `id` int NOT NULL,
-  `client_id` int DEFAULT NULL,
-  `price` int NOT NULL DEFAULT '2000',
-  `availability` tinyint(1) DEFAULT NULL
+  `id` int NOT NULL COMMENT 'id конкретного места',
+  `time_arrive` time DEFAULT NULL COMMENT 'Время прибытия на место',
+  `date_arrive` date DEFAULT NULL COMMENT 'Дата прибытия на место',
+  `client_id` int DEFAULT NULL COMMENT 'id клиента стоянки',
+  `car_id` int NOT NULL COMMENT 'id тачки, которую добавили',
+  `price` int NOT NULL DEFAULT '2000' COMMENT 'цена конкретного места',
+  `availability` tinyint(1) DEFAULT NULL COMMENT 'доступность конкретного места'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_520_ci;
 
 --
 -- Дамп данных таблицы `ParkingPlaces`
 --
 
-INSERT INTO `ParkingPlaces` (`id`, `client_id`, `price`, `availability`) VALUES
-(1, 9, 2000, NULL);
+INSERT INTO `ParkingPlaces` (`id`, `time_arrive`, `date_arrive`, `client_id`, `car_id`, `price`, `availability`) VALUES
+(1, NULL, NULL, 9, 0, 2000, NULL);
 
 --
 -- Индексы сохранённых таблиц
@@ -103,6 +108,7 @@ ALTER TABLE `Cars`
 -- Индексы таблицы `Client`
 --
 ALTER TABLE `Client`
+  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
 --
@@ -125,13 +131,13 @@ ALTER TABLE `Cars`
 -- AUTO_INCREMENT для таблицы `Client`
 --
 ALTER TABLE `Client`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID пользователя', AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT для таблицы `ParkingPlaces`
 --
 ALTER TABLE `ParkingPlaces`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'id конкретного места', AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

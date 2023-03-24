@@ -2,9 +2,9 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');
 
+session_start();
+if (!empty($_SESSION['auth'])):?>
 
-
-?>
 <h1>Добавление нового пользователя</h1>
 <a href="index.php">
     <button>К списку</button>
@@ -19,3 +19,11 @@ ini_set('display_errors', 'on');
     Задолженность:<br> <input value="0" name="debt"><br><br><br>
     <input value="Бахнуть" type="submit">
 </form>
+
+<?php else: ?>
+    <div>
+        <p>Стоит бы авторизироваться, для начала!</p>
+        <a href="login.php">Вот здесь!</a>
+    </div>
+
+<?php endif; ?>

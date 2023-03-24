@@ -1,15 +1,14 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 'on');
+    error_reporting(E_ALL);
+    ini_set('display_errors', 'on');
 
-if (empty($_GET)) {
-    header('Location: index.php');
-    die();
-};
+    if (empty($_GET)) {
+            header('Location: index.php');
+            die();
+            }
 
 
 $id = $_GET['id'];
-
 
 require_once(__DIR__.'/sql_connection.php');
 
@@ -19,7 +18,9 @@ if (mysqli_connect_errno()) {
 $query = "SELECT * FROM Client WHERE id=$id";
 $result = mysqli_query($mysql, $query) or die(mysqli_error($mysql));
 $row = mysqli_fetch_assoc($result);
-?>
+
+session_start();
+if (!empty($_SESSION['auth'])):?>
     <h1>Редактирование данных клиента "<?= $row['client_name'] ?>"</h1>
     <a href="index.php">
         <button>К списку</button>
@@ -35,4 +36,10 @@ $row = mysqli_fetch_assoc($result);
         <input value="Бахнуть" type="submit">
     </form>
 
-<?php
+<?php else: ?>
+    <div>
+        <p>Стоит бы авторизироваться, для начала!</p>
+        <a href="login.php">Вот здесь!</a>
+    </div>
+
+<?php endif; ?>
