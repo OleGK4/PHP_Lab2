@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');
 
-require_once(__DIR__.'/sql_connection.php');
+require_once '../config/sql_connection.php';
 
 if (mysqli_connect_errno()) {
     echo "ОШЫБКА", mysqli_connect_error();
@@ -29,7 +29,7 @@ $query = "UPDATE Client SET
 
 mysqli_query($mysql, $query) or die(mysqli_error($mysql));
 ?>
-<a href="index.php">
+<a href="../index.php">
     <button>К списку</button>
 </a><br><br>
 <?php

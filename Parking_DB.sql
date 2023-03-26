@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 24 2023 г., 17:00
+-- Время создания: Мар 26 2023 г., 12:35
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.1.9
 
@@ -65,11 +65,11 @@ CREATE TABLE `Client` (
 --
 
 INSERT INTO `Client` (`id`, `client_name`, `sale`, `debt`, `login`, `password`, `access_level`) VALUES
+(3, 'Sergein Sergay Sergeevich', NULL, NULL, 'serega', '34433', 1),
 (8, 'Maksimov Maksim Maksimovich', 0, 1200, NULL, NULL, NULL),
 (9, 'Evgeniev Evgeny Evgenievich', 200, 600, NULL, NULL, NULL),
 (10, 'Vasiliev Vasily Vasilievich', 0, 3000, NULL, NULL, NULL),
-(13, 'Vovan Vovkin Vovovich', NULL, NULL, 'vovan', '3443', 0),
-(16, 'Sergein Sergay Sergeevich', NULL, NULL, 'serega', '3443', 1);
+(13, 'Vovan Vovkin Vovovich', NULL, NULL, 'vovan', '3443', 0);
 
 -- --------------------------------------------------------
 
@@ -131,7 +131,7 @@ ALTER TABLE `Cars`
 -- AUTO_INCREMENT для таблицы `Client`
 --
 ALTER TABLE `Client`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID пользователя', AUTO_INCREMENT=17;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID пользователя', AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT для таблицы `ParkingPlaces`

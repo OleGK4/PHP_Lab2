@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__.'/sql_connection.php');
+require_once 'config/sql_connection.php';
 
 
 error_reporting(E_ALL);
@@ -26,7 +26,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         Car colour: <?= $row['color']; ?> <br>
     </p>
 
-<?php
+    <?php
 }
 
 
