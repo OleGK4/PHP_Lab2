@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 26 2023 г., 12:35
+-- Время создания: Мар 28 2023 г., 20:14
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.1.9
 
@@ -41,8 +41,8 @@ CREATE TABLE `Cars` (
 
 INSERT INTO `Cars` (`id`, `brand`, `model`, `color`, `client_id`) VALUES
 (1, 'Toyota', 'Carolla', 'Black', 9),
-(2, 'Mitsubishi', 'Pajero IO', 'Black', 3),
-(3, 'Chevrolet', 'Suburban', 'Dark-blue', 9);
+(8, 'Mitsubishi', 'Pajero IO', 'Brown', 9),
+(9, 'Rhino', 'Logan', 'Black', 3);
 
 -- --------------------------------------------------------
 
@@ -92,7 +92,7 @@ CREATE TABLE `ParkingPlaces` (
 --
 
 INSERT INTO `ParkingPlaces` (`id`, `time_arrive`, `date_arrive`, `client_id`, `car_id`, `price`, `availability`) VALUES
-(1, NULL, NULL, 9, 0, 2000, NULL);
+(1, NULL, NULL, 9, 9, 2000, NULL);
 
 --
 -- Индексы сохранённых таблиц
@@ -125,7 +125,7 @@ ALTER TABLE `ParkingPlaces`
 -- AUTO_INCREMENT для таблицы `Cars`
 --
 ALTER TABLE `Cars`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID тачки', AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID тачки', AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT для таблицы `Client`

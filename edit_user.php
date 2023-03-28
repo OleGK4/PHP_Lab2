@@ -22,10 +22,10 @@ $row = mysqli_fetch_assoc($result);
 session_start();
 if (!empty($_SESSION['user']['auth'])):?>
     <h1>Редактирование данных клиента "<?= $row['client_name'] ?>"</h1>
-    <a href="index.php">
-        <button>К списку</button>
+    <a href="clients.php">
+        <button> < К списку клиентов</button>
     </a><br><br>
-    <form action="vendor/save_edit.php?id=<?= $_GET['id'] ?>" method="POST">
+    <form action="vendor/save_edit_user.php?id=<?= $_GET['id'] ?>" method="POST">
         Имя клиента:<br> <input placeholder="String" name="client_name" value="<?= $row['client_name'] ?>"><br><br>
         Марка авто:<br> <input placeholder="String" name="brand" value="<?= $row['brand'] ?>"><br><br>
         Время въезда:<br> <input placeholder="HH:MM:(SS)" name="time_arrive" value="<?= $row['time_arrive'] ?>"><br><br>
