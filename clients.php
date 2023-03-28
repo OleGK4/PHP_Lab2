@@ -19,8 +19,6 @@ $cars = mysqli_query($mysql, "SELECT * FROM Cars") or die(mysqli_error($mysql));
 $cars = mysqli_fetch_all($cars);
 
 
-
-
 if (!empty($_SESSION['user']['auth'])) :
     ?>
     <a href="index.php">
@@ -28,10 +26,10 @@ if (!empty($_SESSION['user']['auth'])) :
     </a><br><br>
 
     <a href="add_user.php">
-        <button>Добавить нового клиента + </button>
+        <button>Добавить нового клиента +</button>
     </a><br><br>
 
-    <?php echo "------------------------------" .  "<br>";
+    <?php echo "------------------------------" . "<br>";
 
     while ($clients = mysqli_fetch_assoc($result)) {
 
@@ -40,24 +38,27 @@ if (!empty($_SESSION['user']['auth'])) :
 
         <p>
             <a href="edit_user.php?id=<?= $clients['id'] ?>">
-                <button>Редактировать</button></a><br>
+                <button>Редактировать</button>
+            </a><br>
             <a href="vendor/delete_user.php?id=<?= $clients['id'] ?>">
-                <button>Удалить клиента</button></a><br>
+                <button>Удалить клиента</button>
+            </a><br>
             Имя клиента: <?= $clients['client_name']; ?> <br>
             ID: <?= $clients['id']; ?> <br>
             Скидка: <?= $clients['sale']; ?> <br>
             Задолженность: <?= $clients['debt']; ?> <br>
             Логин: <?= $clients['login']; ?> <br>
             Уровень допуска: <?= $clients['access_level']; ?> <br>
-            <ul>Транспорт:</ul>
+        <ul>Транспорт:<br><br>
             <?php
-            if (!empty($clients['id'])){
-                foreach ($cars as $car){
-                    if ($clients['id'] == $car[4]){
+            if (!empty($clients['id'])) {
+                foreach ($cars as $car) {
+                    if ($clients['id'] == $car[4]) {
                         ?>
                         <li><strong>Модель: "<?= $car[2]; ?>"</strong>
                             <a href="vendor/delete_user_car.php?id=<?= $car[0] ?>">
-                                <button>Удалить авто</button></a><br></li><br>
+                                <button>Удалить авто</button>
+                            </a><br></li><br>
                         <li>Бренд: "<?= $car[1]; ?>"</li><br>
                         <li>Цвет: "<?= $car[3]; ?>"</li><br>
                         <?php
@@ -65,8 +66,11 @@ if (!empty($_SESSION['user']['auth'])) :
                 }
             }
             ?>
-            <a href="add_user_car.php?id=<?= $clients['id'] ?>">
-                <button>Добавить авто</button></a><br>
+        </ul>
+
+        <a href="add_user_car.php?id=<?= $clients['id'] ?>">
+            <button>Добавить авто</button>
+        </a><br>
         </p>
         <?php if ($_SESSION['user']['access_level'] != 0) { ?>
 
@@ -81,7 +85,7 @@ if (!empty($_SESSION['user']['auth'])) :
             </a><br>
             <?php
         }
-        echo "-----------------------------" .  "<br>";
+        echo "-----------------------------" . "<br>";
     } ?>
 
 
