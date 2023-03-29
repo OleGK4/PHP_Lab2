@@ -16,11 +16,14 @@ if (mysqli_connect_errno()) {
     echo "ОШЫБКА", mysqli_connect_error();
 }
 
-$query = "DELETE FROM Client WHERE id=$id";
-mysqli_query($mysql, $query) or die(mysqli_error($mysql));
-?>
-    <a href="../index.php">
-        <button>К списку</button>
-    </a><br><br>
-<?php
-echo "Пользователь с ид $id удален";
+$clients = "DELETE FROM Client WHERE id=$id";
+$cars = "DELETE FROM Cars WHERE client_id=$id";
+// Добавить удаление из таблицы со стоянками по left join через id
+
+mysqli_query($mysql, $clients) or die(mysqli_error($mysql));
+mysqli_query($mysql, $cars) or die(mysqli_error($mysql));
+
+$_SESSION['flash'] = "<h2>Пользователь и пренадлежащий ему транспорт удалён!</h2>";
+header('Location: /clients.php');
+
+

@@ -7,7 +7,7 @@ if (mysqli_connect_errno()) {
 }
 
 
-echo "<h1>Добавление траспорта для пользователя</h1>";
+echo "<h1>Добавление транспорта для пользователя</h1>";
 
 if (!empty($_SESSION['user']['auth'])) : ?>
 
@@ -16,9 +16,9 @@ if (!empty($_SESSION['user']['auth'])) : ?>
     </a><br><br>
 
     <form action="vendor/save_add_user_car.php?id=<?= $_GET['id'] ?>" method="POST">
-        Модель:<br> <input placeholder="String" name="model"><br><br>
-        Бренд:<br> <input placeholder="String" name="brand"><br><br>
-        Цвет:<br> <input placeholder="String" name="color"><br><br>
+        Модель:<br> <input required placeholder="String" name="model"><br><br>
+        Бренд:<br> <input required placeholder="String" name="brand"><br><br>
+        Цвет:<br> <input required placeholder="String" name="color"><br><br>
         <input value="Бахнуть" type="submit">
     </form>
 

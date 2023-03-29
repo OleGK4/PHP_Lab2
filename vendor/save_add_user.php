@@ -1,36 +1,47 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');
-
+session_start();
 require_once '../config/sql_connection.php';
 
 if (mysqli_connect_errno()) {
     echo "ОШЫБКА", mysqli_connect_error();
 }
-if (!empty($_POST)) {
-    $client_name = $_POST['client_name'];
-    $brand = $_POST['brand'];
-    $time_arrive = $_POST['time_arrive'];
-    $date_arrive = $_POST['date_arrive'];
-    $price = $_POST['price'];
-    $sale = $_POST['sale'];
-    $debt = $_POST['debt'];
+if (!empty($_POST['login']) and !empty($_POST['password']) and !empty($_POST['confirm'])) {
+    $login = $_POST['login'];
+    $password = $_POST['password'];
+    $client_name = $_POST['lastname'] . ' ' . $_POST['firstname'] . ' ' . $_POST['surname'];
+
+    if ($_POST['access_level']) {
+        $access_level = 1;
+    } else {
+        $access_level = 0;
+    }
+
+    $query = "SELECT * FROM Client WHERE login='$login'";
+    $user = mysqli_fetch_assoc(mysqli_query($mysql, $query));
+
+    if (empty($user)) {
+        if ($_POST['password'] == $_POST['confirm']) {
+            $query = "INSERT INTO Client SET login = '$login',
+                                             password = '$password',
+                                             client_name = '$client_name', 
+                                             access_level = '$access_level' ";
+            $result = mysqli_query($mysql, $query);
+
+
+            $_SESSION['flash'] = '<h2>Успешная регистрация пользователя!</h2>';
+            header('Location: /clients.php');
+        } else {
+            echo "Пароли не совпадают!";
+        }
+
+    } else {
+        echo 'Логин занят!';
+    }
+
+} else {
+    echo 'Не робит!';
 }
 
-$query = "INSERT INTO Client SET
-        client_name='$client_name',
-		brand='$brand',
-		time_arrive='$time_arrive',
-		date_arrive='$date_arrive',
-		price='$price',
-		sale='$sale',
-		debt='$debt'";
 
-mysqli_query($mysql, $query) or die(mysqli_error($mysql));
-?>
-    <a href="../index.php">
-        <button>К списку</button>
-    </a><br><br>
-<?php
-echo 'Новый клиент успешно добавлен!';
-?>

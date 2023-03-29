@@ -7,11 +7,11 @@ if (!empty($_POST['login']) and !empty($_POST['password']) and !empty($_POST['co
     $password = $_POST['password'];
     $client_name = $_POST['lastname'] .' '. $_POST['firstname'] .' '. $_POST['surname'];
 
-    if (!$_POST['access_level']){
-        $access_level = 0;
+    if ($_POST['access_level']){
+        $access_level = 1;
         }
         else {
-            $access_level = 1;
+            $access_level = 0;
         }
 
     $query = "SELECT * FROM Client WHERE login='$login'";
@@ -23,7 +23,8 @@ if (!empty($_POST['login']) and !empty($_POST['password']) and !empty($_POST['co
                                              password = '$password',
                                              client_name = '$client_name', 
                                              access_level = '$access_level' ";
-            $query = "SELECT FROM Client WHERE login='$login'";
+            $result = mysqli_query($mysql, $query);
+            $query = "SELECT * FROM Client WHERE login='$login'";
             $result = mysqli_query($mysql, $query);
             $user = mysqli_fetch_assoc($result);
             session_start();
@@ -50,6 +51,8 @@ if (!empty($_POST['login']) and !empty($_POST['password']) and !empty($_POST['co
         echo 'Логин занят!';
     }
 
+} else {
+    echo 'Ne robit';
 }
 
 

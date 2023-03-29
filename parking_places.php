@@ -39,12 +39,9 @@ if (!empty($_SESSION['user']['auth'])) :
         Дата прибытия на место: <?= $parking['date_arrive']; ?> <br>
         Цена аренды: <?= $parking['price']; ?> <br>
         Статус доступности места: <?php
-        if ($parking['availability'] == 1 || $parking['availability']): { ?>
+        if ($parking['availability'] == 1 || $parking['availability'] || $parking['availability'] == null): { ?>
             Доступно<br>
-            <?php
-        } elseif ($parking['availability'] == null): { ?>
-            Доступно<br>
-            <?php
+       <?php
         } else: { ?>
             Недоуступно<br>
             <?php

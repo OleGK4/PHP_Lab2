@@ -1,37 +1,37 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');
-
+session_start();
 require_once '../config/sql_connection.php';
 
 if (mysqli_connect_errno()) {
     echo "ОШЫБКА", mysqli_connect_error();
 }
 $id = $_GET['id'];
-$client_name = $_POST['client_name'];
-$brand = $_POST['brand'];
-$time_arrive = $_POST['time_arrive'];
-$date_arrive = $_POST['date_arrive'];
-$price = $_POST['price'];
+$client_name = $_POST['lastname'] . ' ' . $_POST['firstname'] . ' ' . $_POST['surname'];
 $sale = $_POST['sale'];
 $debt = $_POST['debt'];
+$login = $_POST['login'];
+$password = $_POST['password'];
+if ($_POST['access_level']) {
+    $access_level = 1;
+} else {
+    $access_level = 0;
+}
 
 
 $query = "UPDATE Client SET
-		client_name='$client_name',
-		brand='$brand',
-		time_arrive='$time_arrive',
-		date_arrive='$date_arrive',
-		price='$price',
-		sale='$sale',
-		debt='$debt' 
-	WHERE id=$id";
+		`client_name`='$client_name',
+		`sale`='$sale',
+		`debt`='$debt',
+		`login`='$login', 
+		`password`='$password', 
+		`access_level`='$access_level' 
+	WHERE `id`=$id";
 
 mysqli_query($mysql, $query) or die(mysqli_error($mysql));
-?>
-<a href="../index.php">
-    <button>К списку</button>
-</a><br><br>
-<?php
-echo 'Данные о клиенте успешно изменены!';
-?>
+
+$_SESSION['flash'] = '<h2>Успешное редактирование пользователя!</h2>';
+header('Location: /clients.php');
+
+

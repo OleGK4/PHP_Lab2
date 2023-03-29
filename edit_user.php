@@ -6,16 +6,14 @@ if (empty($_GET)) {
     header('Location: index.php');
     die();
 }
-
+require_once 'config/sql_connection.php';
 
 $id = $_GET['id'];
-
-require_once 'config/sql_connection.php';
 
 if (mysqli_connect_errno()) {
     echo "ОШЫБКА", mysqli_connect_error();
 }
-$query = "SELECT * FROM Client WHERE id=$id";
+$query = "SELECT * FROM Client WHERE id='$id'";
 $result = mysqli_query($mysql, $query) or die(mysqli_error($mysql));
 $row = mysqli_fetch_assoc($result);
 
@@ -26,13 +24,15 @@ if (!empty($_SESSION['user']['auth'])):?>
         <button> < К списку клиентов</button>
     </a><br><br>
     <form action="vendor/save_edit_user.php?id=<?= $_GET['id'] ?>" method="POST">
-        Имя клиента:<br> <input placeholder="String" name="client_name" value="<?= $row['client_name'] ?>"><br><br>
-        Марка авто:<br> <input placeholder="String" name="brand" value="<?= $row['brand'] ?>"><br><br>
-        Время въезда:<br> <input placeholder="HH:MM:(SS)" name="time_arrive" value="<?= $row['time_arrive'] ?>"><br><br>
-        Дата въезда:<br> <input placeholder="YY-MM-DD" name="date_arrive" value="<?= $row['date_arrive'] ?>"><br><br>
-        Стоимость стоянки:<br> <input readonly name="price" value="<?= $row['price'] ?>"><br><br>
-        Скидка:<br> <input name="sale" value="<?= $row['sale'] ?>"><br><br>
-        Задолженность:<br> <input name="debt" value="<?= $row['debt'] ?>"><br><br><br>
+        Имя клиента:<br> <input required placeholder="String" name="client_name" value="<?= $row['client_name'] ?>"><br>
+        Скидка:<br> <input required name="sale" value="<?= $row['sale'] ?>"><br>
+        Задолженность:<br> <input required name="debt" value="<?= $row['debt'] ?>"><br>
+        Логин:<br> <input required name="login" value="<?= $row['login'] ?>"><br>
+        Пароль:<br> <input required name="debt" value="<?= $row['password'] ?>"><br>
+        Уровень доступа: <br><br>
+        Обычный <input required name="access_level" type="radio" value="<?= $row['access_level'] ?>"><br>
+        Суперпользователь <input required name="access_level" type="radio" value="<?= $row['access_level'] ?>"><br><br><br>
+
         <input value="Бахнуть" type="submit">
     </form>
 
