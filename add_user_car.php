@@ -6,11 +6,15 @@ if (mysqli_connect_errno()) {
     echo "ОШЫБКА", mysqli_connect_error();
 }
 
+$id = $_GET['id'];
 
-echo "<h1>Добавление транспорта для пользователя</h1>";
+$query = "SELECT `client_name` FROM Client WHERE id='$id'";
+$result = mysqli_query($mysql, $query) or die (mysqli_error($mysql));
+$user = mysqli_fetch_assoc($result);
+
 
 if (!empty($_SESSION['user']['auth'])) : ?>
-
+    <h1>Добавление транспорта для пользователя: "<?= $user['client_name'] ?>"</h1>
     <a href="clients.php">
         <button> < К списку клиентов</button>
     </a><br><br>
