@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 29 2023 г., 08:50
+-- Время создания: Мар 30 2023 г., 10:44
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.1.9
 
@@ -95,7 +95,13 @@ CREATE TABLE `ParkingPlaces` (
 --
 
 INSERT INTO `ParkingPlaces` (`id`, `time_arrive`, `date_arrive`, `client_id`, `car_id`, `price`, `availability`) VALUES
-(1, NULL, NULL, 9, 9, 2000, NULL);
+(1, '20:20:00', '2001-12-20', 9, 8, 2000, 0),
+(2, NULL, NULL, NULL, 0, 2000, NULL),
+(3, NULL, NULL, NULL, 0, 2000, NULL),
+(4, NULL, NULL, NULL, 0, 2000, NULL),
+(5, NULL, NULL, NULL, 0, 2000, NULL),
+(6, NULL, NULL, NULL, 0, 2000, NULL),
+(7, NULL, NULL, NULL, 0, 2000, NULL);
 
 --
 -- Индексы сохранённых таблиц
@@ -140,7 +146,7 @@ ALTER TABLE `Client`
 -- AUTO_INCREMENT для таблицы `ParkingPlaces`
 --
 ALTER TABLE `ParkingPlaces`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'id конкретного места', AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'id конкретного места', AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

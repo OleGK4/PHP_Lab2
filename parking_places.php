@@ -7,6 +7,10 @@ if (mysqli_connect_errno()) {
 }
 echo "<h1>Список стояночных мест</h1>";
 
+if (isset($_SESSION['flash'])) {
+    echo $_SESSION['flash'];
+    unset($_SESSION['flash']);
+}
 
 $parking = "SELECT 
    Client.client_name,
@@ -15,7 +19,8 @@ $parking = "SELECT
    ParkingPlaces.time_arrive,
    ParkingPlaces.price,
    ParkingPlaces.availability,
-   ParkingPlaces.id
+   ParkingPlaces.id,
+   ParkingPlaces.client_id
 FROM `ParkingPlaces`
 left join Client on Client.id=ParkingPlaces.client_id
 left join Cars on Cars.id=ParkingPlaces.car_id
@@ -31,23 +36,28 @@ if (!empty($_SESSION['user']['auth'])) :
     <?php echo "------------------------------" . "<br>";
     while ($parking = mysqli_fetch_assoc($result)) { ?>
 
-
+        Имя клиента: <?= $parking['client_name']; ?><br>
         ID места: <?= $parking['id']; ?> <br>
         Модель машины: <?= $parking['model']; ?> <br>
-        Имя клиента: <?= $parking['client_name']; ?> <br>
         Время прибытия на место: <?= $parking['time_arrive']; ?> <br>
         Дата прибытия на место: <?= $parking['date_arrive']; ?> <br>
         Цена аренды: <?= $parking['price']; ?> <br>
         Статус доступности места: <?php
         if ($parking['availability'] == 1 || $parking['availability'] || $parking['availability'] == null): { ?>
-            Доступно<br>
-       <?php
-        } else: { ?>
+            <a href="add_parking_user.php?id=<?= $parking['id'] ?>">Доступно</a><br>
+            <?php
+            } elseif ($parking['availability'] == 0): { ?>
             Недоуступно<br>
             <?php
         }
-        endif;
-        echo "-----------------------------" .  "<br>";
+            endif;
+             if ($parking['client_id'] != null) { ?>
+                <a href="vendor/delete_user_from_parking.php?id=<?= $parking['id'] ?>">
+                    <button>Удалить клиента</button>
+                </a><br>
+                <?php
+            }
+        echo "-----------------------------" . "<br>";
     }
     ?>
 <?php else: ?>
