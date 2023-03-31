@@ -5,6 +5,7 @@ session_start();
 if (mysqli_connect_errno()) {
     echo "ОШЫБКА", mysqli_connect_error();
 }
+
 echo "<h1>Присвоение данных в БД</h1>";
 $id = $_GET['id'];
 echo $_GET['id'];

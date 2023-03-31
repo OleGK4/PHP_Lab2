@@ -28,10 +28,18 @@ if (!empty($_SESSION['user']['auth'])) : ?>
     <?php
     if (!empty($cars)):{
         foreach ($cars as $car) {
-            if ($client_id == $car[4]) {
+            $check_parking = mysqli_query($mysql, "SELECT `car_id` FROM ParkingPlaces WHERE car_id='$car[0]'") or die(mysqli_error($mysql));
+            $check_parking = mysqli_fetch_assoc($check_parking);
+            if (empty($check_parking)){
+                if ($client_id == $car[4]) {
+                    ?>
+                    Модель авто: <br> <input type="text" disabled name="car_model" value="<?= $car[2] ?>">
+                    <input required type="radio" name="car_id" value="<?= $car[0] ?>"><br>
+                    <?php
+                }
+            } if (!empty($check_parking) and $car[0] == $check_parking['car_id']) {
                 ?>
-                Модель авто: <br> <input type="text" disabled name="car_model" value="<?= $car[2] ?>">
-                <input type="radio" name="car_id" value="<?= $car[0] ?>"><br>
+                Занятая тачка! <br> <input type="text" disabled name="car_model" value="<?= $car[2] ?>"><br>
                 <?php
             }
         }
@@ -45,8 +53,8 @@ if (!empty($_SESSION['user']['auth'])) : ?>
     ?>
     <?php if (!empty($cars)) { ?>
         <input type="hidden" name="client_id" value="<?= $client_id ?>"><br>
-        Время прибытия на место: <br> <input type="time" name="time_arrive"><br>
-        Дата прибытия на место: <br> <input type="date" name="date_arrive"><br>
+        Время прибытия на место: <br> <input required type="time" name="time_arrive"><br>
+        Дата прибытия на место: <br> <input required type="date" name="date_arrive"><br>
         <button type="submit">Отправить</button>
 </form>
        <?php

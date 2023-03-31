@@ -8,7 +8,7 @@ if (mysqli_connect_errno()) {
     echo "ОШЫБКА", mysqli_connect_error();
 }
 $id = $_GET['id'];
-$client_name = $_POST['lastname'] . ' ' . $_POST['firstname'] . ' ' . $_POST['surname'];
+$client_name = $_POST['client_name'];
 $sale = $_POST['sale'];
 $debt = $_POST['debt'];
 $login = $_POST['login'];

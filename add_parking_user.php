@@ -25,7 +25,7 @@ if (!empty($_SESSION['user']['auth'])) :
     while ($clients = mysqli_fetch_assoc($result)) {
         ?>
             Имя пользователя: <br> <input type="text" disabled name="client_name" value="<?= $clients['client_name'] ?>">
-            <input type="radio" name="client_id" value="<?= $clients['id'] ?>"><br>
+            <input type="radio" required name="client_id" value="<?= $clients['id'] ?>"><br>
         <?php
     }
     ?>

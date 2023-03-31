@@ -28,7 +28,7 @@ if (!empty($_SESSION['user']['auth'])):?>
         Скидка:<br> <input required name="sale" value="<?= $row['sale'] ?>"><br>
         Задолженность:<br> <input required name="debt" value="<?= $row['debt'] ?>"><br>
         Логин:<br> <input required name="login" value="<?= $row['login'] ?>"><br>
-        Пароль:<br> <input required name="debt" value="<?= $row['password'] ?>"><br>
+        Пароль:<br> <input required name="password" value="<?= $row['password'] ?>"><br>
         Уровень доступа: <br><br>
         Обычный <input required name="access_level" type="radio" value="<?= $row['access_level'] ?>"><br>
         Суперпользователь <input required name="access_level" type="radio" value="<?= $row['access_level'] ?>"><br><br><br>

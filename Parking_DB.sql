@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 30 2023 г., 10:44
+-- Время создания: Мар 31 2023 г., 08:20
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.1.9
 
@@ -43,7 +43,9 @@ INSERT INTO `Cars` (`id`, `brand`, `model`, `color`, `client_id`) VALUES
 (1, 'Toyota', 'Carolla', 'Black', 9),
 (8, 'Mitsubishi', 'Pajero IO', 'Brown', 9),
 (9, 'Rhino', 'Logan', 'Black', 3),
-(12, 'BMW', 'Velo', 'PINK', 26);
+(12, 'BMW', 'Velo', 'PINK', 26),
+(17, 'BMW', 'Velo', 'PINK', 13),
+(18, 'Lamborgini', 'AC-130', 'Red', 9);
 
 -- --------------------------------------------------------
 
@@ -66,7 +68,7 @@ CREATE TABLE `Client` (
 --
 
 INSERT INTO `Client` (`id`, `client_name`, `sale`, `debt`, `login`, `password`, `access_level`) VALUES
-(3, 'Sergin Sergey Sergeevich', 0, 34433, 'serega', '', 1),
+(3, 'Sergin Sergey Sergeevich', 0, 34433, 'serega', 'hg', 1),
 (8, 'Maksimov Maksim Maksimovich', 0, 1200, NULL, NULL, NULL),
 (9, 'Evgin Evgeny Evgeevich', 200, 234, 'evgexa', '', 0),
 (10, 'Vasiliev Vasily Vasilievich', 0, 3000, NULL, NULL, NULL),
@@ -96,7 +98,7 @@ CREATE TABLE `ParkingPlaces` (
 
 INSERT INTO `ParkingPlaces` (`id`, `time_arrive`, `date_arrive`, `client_id`, `car_id`, `price`, `availability`) VALUES
 (1, '20:20:00', '2001-12-20', 9, 8, 2000, 0),
-(2, NULL, NULL, NULL, 0, 2000, NULL),
+(2, '20:20:00', '1999-12-20', 9, 1, 2000, 0),
 (3, NULL, NULL, NULL, 0, 2000, NULL),
 (4, NULL, NULL, NULL, 0, 2000, NULL),
 (5, NULL, NULL, NULL, 0, 2000, NULL),
@@ -134,7 +136,7 @@ ALTER TABLE `ParkingPlaces`
 -- AUTO_INCREMENT для таблицы `Cars`
 --
 ALTER TABLE `Cars`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID тачки', AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID тачки', AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT для таблицы `Client`
