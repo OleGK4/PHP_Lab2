@@ -29,7 +29,7 @@ if (!empty($_SESSION['user']['auth'])) : ?>
     ";
 
     mysqli_query($mysql, $add_user) or die(mysqli_error($mysql));
-    $_SESSION['flash'] = "<h2>Пользователь добавлен! </h2>";
+    $_SESSION['flash'] = "<h2>Клиент и его авто добавлены! </h2>";
     header('Location: /parking_places.php');
 
     ?>
